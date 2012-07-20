@@ -89,9 +89,6 @@ object Main extends App {
   println(length(o))
 
   val k = 5
-  var l1 = (1, 2, 3, 4)
-  var l2 = ((1, 2), (1, 3), (2, 3), (1, 4), (2, 4), (3, 4))
-  var l3 = (3, 4, 5, 5, 6, 7)
 
   println(List.range(1, k))
   println(List.range(1, k).map(i => List.range(1, i) map (x => (i, x))))
@@ -101,6 +98,32 @@ object Main extends App {
   println(List.range(1, k).map(i => List.range(1, i) map (x => (i, x)))
 	.foldRight(List[(Int,Int)]()){(xs,ys) => xs ::: ys}
       .filter(pair => (pair._1+pair._2) % 5 == 0))
+
+  val greets = "ola" :: "ole" :: "hi" :: "season greetings" :: Nil
+  println("above 3: " + greets.count(_.length > 3))
+  println(greets.mkString(", "))
+  val numberedGreetings = for {
+    str <- greets
+    num <- o if str.startsWith("o") && num < 6
+  } yield num + " " + str
+  println(numberedGreetings.size)
+  numberedGreetings.foreach(println)
+
+  val nouns = "dude" :: "dad" :: "mom":: "moron" ::Nil
+
+  import scala.collection.immutable.TreeSet
+  val sortedNouns = TreeSet[String]() ++ nouns
+
+  val anotherGreetSeq =
+    for (
+        (zemanel, cajo) <- greets zip sortedNouns
+    ) yield zemanel + ", " + cajo
+  println((anotherGreetSeq mkString ";\n") + ".")
+  println(greets.head)
+  println(greets.tail)
+  println(greets.init)
+  println(greets.last)
+
 }
 
 
