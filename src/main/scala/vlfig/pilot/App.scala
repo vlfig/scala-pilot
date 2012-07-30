@@ -22,6 +22,8 @@ abstract class Tree[A] {
 case class EmptyTree extends Tree
 case class Node[A](elem: A, right: Tree[A], left: Tree[A]) extends Tree[A]
 
+case class Person(name: String, isMale: Boolean, children: Person*)
+
 object Main extends App {
   val x = EmptyStack
   val y = x.push(1).push(2).push("Ola").push("ole")
@@ -93,11 +95,11 @@ object Main extends App {
   println(List.range(1, k))
   println(List.range(1, k).map(i => List.range(1, i) map (x => (i, x))))
   println(List.range(1, k).map(i => List.range(1, i) map (x => (i, x)))
-	.foldRight(List[(Int,Int)]()){(xs,ys) => xs ::: ys})
+    .foldRight(List[(Int, Int)]()) { (xs, ys) => xs ::: ys })
   println(List.range(1, k).flatMap(i => List.range(1, i) map (x => (i, x))))
   println(List.range(1, k).map(i => List.range(1, i) map (x => (i, x)))
-	.foldRight(List[(Int,Int)]()){(xs,ys) => xs ::: ys}
-      .filter(pair => (pair._1+pair._2) % 5 == 0))
+    .foldRight(List[(Int, Int)]()) { (xs, ys) => xs ::: ys }
+    .filter(pair => (pair._1 + pair._2) % 5 == 0))
 
   val greets = "ola" :: "ole" :: "hi" :: "season greetings" :: Nil
   println("above 3: " + greets.count(_.length > 3))
@@ -109,14 +111,14 @@ object Main extends App {
   println(numberedGreetings.size)
   numberedGreetings.foreach(println)
 
-  val nouns = "dude" :: "dad" :: "mom":: "moron" ::Nil
+  val nouns = "dude" :: "dad" :: "mom" :: "moron" :: Nil
 
   import scala.collection.immutable.TreeSet
   val sortedNouns = TreeSet[String]() ++ nouns
 
   val anotherGreetSeq =
     for (
-        (zemanel, cajo) <- greets zip sortedNouns
+      (zemanel, cajo) <- greets zip sortedNouns
     ) yield zemanel + ", " + cajo
   println((anotherGreetSeq mkString ";\n") + ".")
   println(greets.head)
@@ -124,8 +126,13 @@ object Main extends App {
   println(greets.init)
   println(greets.last)
 
+  val p1 = Person("Lara", false)
+  val p2 = Person("John", true, p1)
+  val p3 = Person("Ruperth", true)
+  val p4 = Person("Susie", false)
+  val p5 = Person("Claire", false, p3, p4)
+  val persons = List(p1, p2, p3, p4, p5)
+  val motherChildPairs = for (p <- persons if !p.isMale; c <- p.children) yield (p.name, c.name)
+  println(motherChildPairs)
 }
-
-
-
 
