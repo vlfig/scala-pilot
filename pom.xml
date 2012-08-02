@@ -21,6 +21,16 @@
 			<version>${scala.version}</version>
 		</dependency>
 		<dependency>
+			<groupId>joda-time</groupId>
+			<artifactId>joda-time</artifactId>
+			<version>2.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.joda</groupId>
+			<artifactId>joda-convert</artifactId>
+			<version>1.2</version>
+		</dependency>
+		<dependency>
 			<groupId>org.scalatest</groupId>
 			<artifactId>scalatest_2.9.0</artifactId>
 			<version>1.6.1</version>
@@ -102,7 +112,8 @@
 		</plugins>
 		<pluginManagement>
 			<plugins>
-				<!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
+				<!--This plugin's configuration is used to store Eclipse m2e settings only. It 
+					has no influence on the Maven build itself. -->
 				<plugin>
 					<groupId>org.eclipse.m2e</groupId>
 					<artifactId>lifecycle-mapping</artifactId>
@@ -113,8 +124,7 @@
 								<pluginExecution>
 									<pluginExecutionFilter>
 										<groupId>net.alchim31.maven</groupId>
-										<artifactId>
-											scala-maven-plugin
+										<artifactId> scala-maven-plugin 
 										</artifactId>
 										<versionRange>[3.0.1,)</versionRange>
 										<goals>
